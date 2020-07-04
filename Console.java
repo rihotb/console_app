@@ -32,16 +32,23 @@ public class Console {
         if (num <= 6 || num >= 0) {
           if (num == 1) {
             index();
+            i += 1;
           } else if (num == 2) {
             register();
+            i += 1;
           } else if (num == 3) {
             detail();
+            i += 1;
           } else if (num == 4) {
             update();
+            i += 1;
           } else if (num == 5) {
             delete();
+            i += 1;
           } else if (num == 6) {
             i += 1;
+          } else if (num == 0) {
+
           } else {
             System.out.println("[Notes]存在しない機能番号です");
           }
@@ -98,7 +105,7 @@ public class Console {
 
     while (i == 0) {
       if (title.length() > 20) {
-        System.out.println("タイトルの文字数の上限は20文字です");
+        System.out.println("[Notes]タイトルの文字数の上限は20文字です");
         displayMessage("[Notes]タイトルを入力してください");
         title = scan.next();
       } else {
@@ -112,7 +119,7 @@ public class Console {
     while (i == 1) {
 
       if (description.length() > 500) {
-        System.out.println("詳細の文字数の上限は500文字です");
+        System.out.println("[Notes]詳細の文字数の上限は500文字です");
         displayMessage("[Notes]詳細を入力してください");
         description = scan.next();
       } else {
@@ -129,7 +136,7 @@ public class Console {
       pstmt.setString(2, description);
 
       pstmt.executeUpdate();
-      System.out.println("登録完了しました");
+      System.out.println("[Notes]登録完了しました");
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -156,7 +163,7 @@ public class Console {
       boolean rsNext = rs.next();
       while (i == 0) {
         if (rsNext == false) {
-          System.out.println("存在しないIDです");
+          System.out.println("[Notes]存在しないIDです");
           displayMessage("[Notes]詳細表示する情報のIDを入力してください");
           int retryId = scan.nextInt();
           pstmt.setInt(1, retryId);
@@ -202,7 +209,7 @@ public class Console {
 
       while (i == 0) {
         if (rsNext == false) {
-          System.out.println("存在しないIDです");
+          System.out.println("[Notes]存在しないIDです");
           displayMessage("[Notes]詳細表示する情報のIDを入力してください");
           id = scan.nextInt();
           pstmt.setInt(1, id);
