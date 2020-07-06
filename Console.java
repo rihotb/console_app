@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,6 +14,7 @@ public class Console {
   public static void main(String[] args) {
     int i = 0;
     int num = 0;
+
     while (i == 0) {
       System.out.println("[Notes]機能");
       System.out.println("0.機能一覧");
@@ -22,7 +24,6 @@ public class Console {
       System.out.println("4.Noteの更新");
       System.out.println("5.Noteの削除");
       System.out.println("6.システム終了");
-
       displayMessage("[Notes]機能番号を入力してください");
       Scanner scan = new Scanner(System.in);
 
@@ -32,7 +33,7 @@ public class Console {
         if (num <= 6 || num >= 0) {
           if (num == 1) {
             index();
-            i += 1;
+
           } else if (num == 2) {
             register();
             i += 1;
@@ -46,7 +47,9 @@ public class Console {
             delete();
             i += 1;
           } else if (num == 6) {
+            System.out.println("[Notes]システム終了します");
             i += 1;
+            scan.close();
           } else if (num == 0) {
 
           } else {
@@ -54,8 +57,9 @@ public class Console {
           }
         }
 
-      } finally {
-        scan.close();
+      } catch (InputMismatchException e) {
+        System.out.println("[Notes]入力が数値ではありません。");
+        break;
       }
     }
 
@@ -82,7 +86,7 @@ public class Console {
         System.out.println("ID:" + id);
         System.out.println("タイトル:" + title);
         if (description.length() > 15) {
-          System.out.println("詳細:" + description.substring(0, 15) + "…");
+          System.out.println("詳細:" + description.substring(0, 15) + "...");
         } else {
           System.out.println("詳細:" + description);
         }
